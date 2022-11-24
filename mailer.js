@@ -1,0 +1,31 @@
+import * as dotenv from "dotenv";
+import nodemailer from "nodemailer";
+dotenv.config();
+
+export const sendMail = (html) => {
+  let transporter = nodemailer.createTransport({
+    host: "smtp.mail.ru",
+    port: 465,
+    secure: true,
+    auth: {
+      user: process.env.SENDER,
+      pass: process.env.PASS,
+    },
+  });
+
+  transporter.sendMail(
+    {
+      from: "almightymailer@mail.ru",
+      to: "klimentykk@gmail.com",
+      subject: "Message from Node js",
+      html: html,
+    },
+    (error, info) => {
+      if (error) {
+        console.error(error, "Failed to send message");
+      } else {
+        console.log(info);
+      }
+    }
+  );
+};
