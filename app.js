@@ -24,6 +24,10 @@ const main = async () => {
     }
   );
 
+  //TODO:
+  // 1. Add a link to markup to be able to visit interesting vacancies.
+  // 2. Bring in a db to store and compare search results.
+
   const markUp = `<section>
     <h1>Report for new vacancies on hh.ru</h1>
     <p>There are currently ${amount} vacancies that satisfy your request.</p>
