@@ -32,10 +32,6 @@ const main = async () => {
 
   const db = new DataBase();
   const info = await db.connectAndCompare(results);
-  console.log(info);
-  //TODO:
-  // 1. Add a link to markup to be able to visit interesting vacancies.
-  // 2. Bring in a db to store and compare search results.
 
   const markUp = `<section>
     <h1>Report for new vacancies on hh.ru</h1>
@@ -82,4 +78,11 @@ const main = async () => {
   await browser.close();
 };
 
-main();
+const interval = (hours) => {
+  main();
+  return 1000 * 60 * 60 * hours;
+};
+
+setInterval(() => {
+  main();
+}, interval(3));
