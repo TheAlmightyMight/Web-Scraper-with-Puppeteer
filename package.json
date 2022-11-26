@@ -15,7 +15,6 @@
     "dotenv": "^16.0.3",
     "mongodb": "^4.12.1",
     "nodemailer": "^6.8.0",
-    "nodemon": "^2.0.20",
     "puppeteer": "^19.3.0"
   }
 }
