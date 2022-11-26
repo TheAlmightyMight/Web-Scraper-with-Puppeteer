@@ -17,7 +17,7 @@ export const sendMail = (html) => {
     {
       from: "almightymailer@mail.ru",
       to: "klimentykk@gmail.com",
-      subject: "Message from Node js",
+      subject: "Report from a web parser",
       html: html,
     },
     (error, info) => {
