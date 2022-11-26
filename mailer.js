@@ -1,6 +1,6 @@
 import * as dotenv from "dotenv";
-import nodemailer from "nodemailer";
 dotenv.config();
+import nodemailer from "nodemailer";
 
 export const sendMail = (html) => {
   let transporter = nodemailer.createTransport({
