@@ -1,5 +1,6 @@
 import puppeteer from "puppeteer";
 import { sendMail } from "./mailer.js";
+import DataBase from "./db.js";
 
 const main = async () => {
   const browser = await puppeteer.launch();
@@ -24,14 +25,44 @@ const main = async () => {
     }
   );
 
+  const results = [];
+  for (let i = 0; i < amount; i++) {
+    results.push({ title: headings[i], description: descriptions[i] });
+  }
+
+  const db = new DataBase();
+  const info = await db.connectAndCompare(results);
+  console.log(info);
   //TODO:
   // 1. Add a link to markup to be able to visit interesting vacancies.
   // 2. Bring in a db to store and compare search results.
 
   const markUp = `<section>
     <h1>Report for new vacancies on hh.ru</h1>
-    <p>There are currently ${amount} vacancies that satisfy your request.</p>
+    <p>There are currently ${amount} vacancies that satisfy your request ${
+    info.difference > 0
+      ? "of which" + info.newVacancies.length + "are new ones"
+      : ""
+  }.</p>
     <h2>New records are:</h2>
+    <ul>
+    ${(() => {
+      const arr = [];
+
+      if (info.newVacancies.length !== 0) {
+        for (let i = 0; i < info.newVacancies.length; i++) {
+          arr.push(`<li>
+              <h3>Title: ${info.newVacancies[i].title}</h3>
+              <p>Info: ${info.newVacancies[i].description}</p>
+            </li>`);
+        }
+        return arr.join("");
+      } else {
+        return "<li><p>There are none.</p></li>";
+      }
+    })()}
+  </ul>
+  <h2>Others:</h2>
     <ul>
       ${(() => {
         const arr = [];
@@ -47,8 +78,6 @@ const main = async () => {
     </section>`;
 
   sendMail(markUp);
-
-  //   await page.screenshot({ path: "screenshot.png", fullPage: true });
 
   await browser.close();
 };
