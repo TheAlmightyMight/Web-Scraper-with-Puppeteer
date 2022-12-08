@@ -1,7 +1,15 @@
-# Web-Scraper-with-Puppeteer
+# 🚀 Welcome to your new awesome project!
 
-## Features:
+This project has been created using **webpack-cli**, you can now run
 
-- Parse hh.ru website for remote js trainee vacancies
-- Save to mongodb Atlas cluster for comparison
-- Get me notified with nodemailer via gmail and mail.ru services
+```
+npm run build
+```
+
+or
+
+```
+yarn build
+```
+
+to bundle your application
