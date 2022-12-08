@@ -28,14 +28,8 @@ const config = {
         type: "asset",
       },
       { exclude: "/node_modules/" },
-
-      // Add your rules for custom modules here
-      // Learn more about loaders from https://webpack.js.org/loaders/
     ],
   },
-  //   resolve: {
-  //     fallback: { fs: await import("path-browserify") },
-  //   },
 };
 
 const Config = () => {
