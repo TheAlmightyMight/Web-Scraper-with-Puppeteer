@@ -1,6 +1,7 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 import path from "path";
+import NodePolyfillPlugin from "node-polyfill-webpack-plugin";
 
 const isProduction = process.env.NODE_ENV == "production";
 
@@ -10,14 +11,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 const config = {
+  target: "node18.12",
   entry: path.join(__dirname, "src/app.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
   },
-  plugins: [
-    // Add your plugins here
-    // Learn more about plugins from https://webpack.js.org/configuration/plugins/
-  ],
+  plugins: [new NodePolyfillPlugin()],
   module: {
     rules: [
       {
@@ -34,6 +33,9 @@ const config = {
       // Learn more about loaders from https://webpack.js.org/loaders/
     ],
   },
+  //   resolve: {
+  //     fallback: { fs: await import("path-browserify") },
+  //   },
 };
 
 const Config = () => {
